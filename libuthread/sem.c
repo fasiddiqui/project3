@@ -7,24 +7,27 @@
 #include "thread.h"
 
 
-
 struct semaphore
 {
 	int value;
-	queue L; // list of processes
+	queue List; // list of processes
 };
 
 
 
 sem_t sem_create(size_t count)
 {
-	sem_t count = malloc(sizeof(*count));
-	count -> size = 0;
+	sem_t sem = malloc(sizeof(*sem));
+	sem->List = malloc(sizeof(queue_t); 
+	sem->value = count;
+
 
 	//initializing the semaphore
-	if (count)
+	if (sem)
 	{
-		return *count;
+		//returning a pointer if succeeding
+		// returns null otherwise 
+		return sem;
 	}	
 
 	return NULL; //when initializing fails
