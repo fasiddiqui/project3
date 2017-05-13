@@ -1,6 +1,28 @@
-libuthread.a:
-	# TODO
+TARGET  := libuthread.a
+OBJ 	:= queue.o sem.o tps.o
 
+CC 	:= gcc
+AR 	:= ar
+CFLAGS  := -g -c
+AFLAGS  := rcs
+CLARGS  := -f $(OBJ) *.a *.d
+
+ifneq ($(V),1)
+Q = @
+endif
+
+all: $(TARGET) $(OBJ)
+
+deps := $(patsubst %.o,%.d,$(OBJ))
+-include $(deps)
+DEPFLAGS = -MMD -MF $(@:.o=.d)
+
+libuthread.a: $(OBJ)
+	@echo "CC $@"
+	$(AR) $(AFLAGS) $(TARGET) $(OBJ)	
+%.o: %.c 
+	@echo "CC $@"
+	$(Q)$(CC) $(CFLAGS) -o $@ $< $(DEPFLAGS)	
 clean:
-	# TODO
+	rm $(CLARGS)
 
