@@ -6,9 +6,28 @@
 #include "sem.h"
 #include "thread.h"
 
+
+
+struct semaphore
+{
+	int value;
+	queue L; // list of processes
+};
+
+
+
 sem_t sem_create(size_t count)
 {
-	return NULL;
+	sem_t count = malloc(sizeof(*count));
+	count -> size = 0;
+
+	//initializing the semaphore
+	if (count)
+	{
+		return *count;
+	}	
+
+	return NULL; //when initializing fails
 }
 
 int sem_destroy(sem_t sem)
@@ -25,4 +44,5 @@ int sem_up(sem_t sem)
 {
 	return 0;
 }
+
 
