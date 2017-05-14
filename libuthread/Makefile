@@ -1,11 +1,13 @@
 TARGET  := libuthread.a
 OBJ 	:= queue.o sem.o tps.o
+RMS 	:= queue.o sem.o tps.o *.a *.d
+
 
 CC 	:= gcc
 AR 	:= ar
 CFLAGS  := -g -c
 AFLAGS  := rcs
-CLARGS  := -f $(OBJ) *.a *.d
+CLARGS  := -f $(RMS) 
 
 ifneq ($(V),1)
 Q = @

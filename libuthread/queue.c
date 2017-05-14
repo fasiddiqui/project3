@@ -75,12 +75,14 @@ int queue_enqueue(queue_t queue, void *data)
   if (queue->tail == NULL)
   {
     queue->head = queue->tail = tmp;
+    queue->size++;
     return (0);
   }//IF_EMPTY :- 1st Element
 
   //newNode Inserted as Last Node
   queue->tail->next = tmp;
   queue->tail = tmp;
+  queue->size++;
 
   return (0); //success
 }
@@ -93,29 +95,27 @@ int queue_dequeue(queue_t queue, void **data)
     return (-1);
   else if (!queue || !data)
     return (-1);
-
-  //Pop_Top_of_LL+save
+  else if(queue->size = 0){
+    fprintf(stderr, "Attempting to free empty queue\n");
+    return(-1);
+  }
+  
+  //Pop_Top_of_LL+save+Free
+  
   *data = queue->head->data;
+  
+  /*Free_Node_Save_Space (Experimental)
+  Node fNode = NULL;
+  fNode = queue->head;
+  free(fNode); <-THIS line must go last */ 
+  
   queue->head = queue->head->next;
+  queue->size--;
 
   if (queue->head == NULL)
     queue->tail = NULL;
 
   return (0);
-}
-
-void print_myqueue(queue_t queue)
-{
-	Node* temp =queue->head;
-//	//printf("==== My Queue=====\n");
-	int i = 0;
-	while(temp != NULL)
-	{
-//		//printf("%d, node: %p, data: %p\n", i, temp, temp->data);
-		i++;
-		temp = temp->next;
-	}
-//	//printf("===================\n");
 }
 
 int queue_delete(queue_t queue, void *data)
@@ -137,7 +137,6 @@ int queue_delete(queue_t queue, void *data)
 
 
   }
-
 
   //Error_Checking
   if (!queue || !data)
@@ -162,11 +161,8 @@ int queue_delete(queue_t queue, void *data)
     {
       tmp = ptr->next;
 
-
-
       if (tmp->data == data)
       {
-
         tmp = ptr->next->next;
         free(ptr->next);
         ptr->next = tmp;
@@ -230,12 +226,12 @@ int queue_iterate(queue_t queue, queue_func_t func, void *arg, void **data)
       //callback function here
       if(func(queue, cNode->data, arg)){
 
-        //printf("FIND ITEM %d \n", match);
         *data = (intptr_t *)cNode->data;
-   
-      }//FOUND_ITEM
-               
-    }       
+        
+        if(data)
+          return (int)(*data);
+      }//FOUND_ITEM          
+    }//Iteration       
   }//find_item
 
   return (0);
@@ -243,17 +239,6 @@ int queue_iterate(queue_t queue, queue_func_t func, void *arg, void **data)
 
 int queue_length(queue_t queue)
 {
-  unsigned int size = 0;
-  Node *ptr = newNode(NULL);
-  ptr = queue->head;
-
-  while (ptr)
-  {
-    size++;
-    ptr = ptr->next;
-  }
-  queue->size = size;
-
-  return (size);
+  return (queue->size);
 }
 

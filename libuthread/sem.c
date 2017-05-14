@@ -6,46 +6,73 @@
 #include "sem.h"
 #include "thread.h"
 
-
-struct semaphore
+struct semaphore 
 {
-	int value;
-	queue List; // list of processes
+  int value;
+  queue_t List; // list of thread IDs
 };
-
 
 
 sem_t sem_create(size_t count)
 {
-	sem_t sem = malloc(sizeof(*sem));
-	sem->List = malloc(sizeof(queue_t); 
-	sem->value = count;
+  sem_t sem  = malloc(sizeof(sem_t));
+  sem->value = count;
+  sem->List  = queue_create();
 
+  //initializing the semaphore
+  if (sem)
+  {
+    //If Allocated Return pointer to semaphore
+    return sem;
+  }
 
-	//initializing the semaphore
-	if (sem)
-	{
-		//returning a pointer if succeeding
-		// returns null otherwise 
-		return sem;
-	}	
-
-	return NULL; //when initializing fails
+  return NULL; //when initializing fails
 }
 
 int sem_destroy(sem_t sem)
 {
-	return 0;
+  //Error_Checking
+  if(sem == NULL){
+    return(-1);
+  }//semaphore is NULL 
+  else if(queue_length(sem->List)){
+    return(-1);
+  }//Or threads are still being blocked
+    
+  
+  queue_destroy(sem->List);
+  free(sem);
+  return 0;
 }
 
 int sem_down(sem_t sem)
 {
-	return 0;
+  //Error_Checking(UnAllocated Object)
+  if(sem == NULL)
+    return(-1);
+  
+  if(sem->value > 0)
+    sem->value -= 1;
+  else{
+    pthread_t id = (pthread_t)thread_block();
+    queue_enqueue(sem->List, id);  
+  }
+  
+  return 0;
 }
 
 int sem_up(sem_t sem)
 {
-	return 0;
+  if(queue_length(sem->List)){
+    pthread_t id;
+    queue_dequeue(sem->List, (void*)id);//remove thread via its ID
+    thread_unblock(id);//wakeup this thread
+  }//QUEUE_NOT_EMPTY
+  else{
+    sem->value += 1;
+  }//increment
+    
+  return 0;
 }
 
 
