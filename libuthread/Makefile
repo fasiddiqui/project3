@@ -13,15 +13,15 @@ ifneq ($(V),1)
 Q = @
 endif
 
-all: $(TARGET) $(OBJ)
+all: $(OBJ) $(TARGET) 
 
 deps := $(patsubst %.o,%.d,$(OBJ))
 -include $(deps)
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
-libuthread.a: $(OBJ)
+libuthread.a: $(OBJ) thread.o
 	@echo "CC $@"
-	$(AR) $(AFLAGS) $(TARGET) $(OBJ)	
+	$(AR) $(AFLAGS) $(TARGET) $(OBJ) thread.o	
 %.o: %.c 
 	@echo "CC $@"
 	$(Q)$(CC) $(CFLAGS) -o $@ $< $(DEPFLAGS)	
