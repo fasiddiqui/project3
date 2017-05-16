@@ -90,4 +90,11 @@ int tps_write(size_t offset, size_t length, char *buffer);
  */
 int tps_clone(pthread_t tid);
 
+
+/*
+ * A Helper function to iterator over the Page Table
+ * Methods based on option parameter
+ */
+int tps_iterate(pthread_t tid, int option);
+
 #endif /* _TPS_H */
