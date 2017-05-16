@@ -47,31 +47,30 @@ int sem_destroy(sem_t sem)
 
 int sem_down(sem_t sem)
 {
-  //Error_Checking(UnAllocated Object)
-  if(sem == NULL)
-    return(-1);
-  
-  if(sem->value > 0)
-    sem->value -= 1;
-  else{
-    pthread_t id = (pthread_t)thread_block();
-    queue_enqueue(sem->List, id);  
-  }
-  
-  return 0;
+	enter_critical_section();
+  	//Error_Checking(UnAllocated Object)
+  	if(sem == NULL)
+    		return(-1);
+  	else if(sem->value > 0){
+    		sem->value -= 1;
+    		exit_critical_section();
+	}
+	
+  	return 0;
+	
 }
-
 int sem_up(sem_t sem)
 {
-  if(queue_length(sem->List)){
-    pthread_t id;
-    queue_dequeue(sem->List, (void*)id);//remove thread via its ID
-    thread_unblock(id);//wakeup this thread
-  }//QUEUE_NOT_EMPTY
-  else{
-    sem->value += 1;
-  }//increment
-    
+	
+	if(queue_length(sem->List)){
+		enter_critical_section();
+    	}//QUEUE_NOT_EMPTY
+  	else{
+    		sem->value += 1;
+		exit_critical_section();
+  	}//increment
+    		
+	
   return 0;
 }
 
