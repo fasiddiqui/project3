@@ -95,7 +95,7 @@ int queue_dequeue(queue_t queue, void **data)
     return (-1);
   else if (!queue || !data)
     return (-1);
-  else if(queue->size = 0){
+  else if(queue->size == 0){
     fprintf(stderr, "Attempting to free empty queue\n");
     return(-1);
   }

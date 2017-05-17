@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "queue.h"
+#include "thread.h"
 #include "sem.h"
 
 

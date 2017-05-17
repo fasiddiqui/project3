@@ -174,7 +174,7 @@ int tps_iterate(pthread_t tid, int option)
   {
     for (index = 0; index < PAGE_SIZE; index++)
     {
-      if (table[index]->id = tid)
+      if (table[index]->id == tid)
         if (table[index]->valid == 0)
           return (-1);
     }//TPS_UNALLOCATED
@@ -183,7 +183,7 @@ int tps_iterate(pthread_t tid, int option)
   {
     for (index = 0; index < PAGE_SIZE; index++)
     {
-      if (table[index]->id = tid)
+      if (table[index]->id == tid)
         if (table[index]->valid == 1)
           return (-1);
     }//TPS_ALLOCATED
@@ -199,7 +199,7 @@ PAGE tps_find(pthread_t tid)
 
   for (index = 0; index < PAGE_SIZE; index++)
   {
-    if (table[index]->id = tid)//might need to do *tid since pointer
+    if (table[index]->id == tid)//might need to do *tid since pointer
       return table[index];
   }//TPS_UNALLOCATED
 
@@ -235,7 +235,7 @@ int tps_clone(pthread_t tid)
 
 
   //copy contents 
-  memcpy(newPage, reqPage, sizeof (PAGE));
+  memcpy(newPage, reqPage, TPS_SIZE);
   
   if (newPage == MAP_FAILED)
   {
