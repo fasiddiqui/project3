@@ -23,7 +23,7 @@
 * I index the pages based on their thread_IDs
 * ^ requires me to make by Table Large enough to avoid collisions
 
-** Basic Page Struct -> void *address; //address maps to anonymous memory pointer**
+**Page Struct -> void *address; //address maps to anonymous memory pointer**
 
 **Key information**
 * Semaphores implementation seemed simple but currently hangs
