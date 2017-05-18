@@ -30,7 +30,7 @@
 *    int valid;
 *    void *address; //address maps to anonymous memory pointer
 *
-* }; //alias -> PAGE
+** }; //alias -> PAGE
 
 **Key information**
 * Semaphores implementation seemed simple but currently hangs
