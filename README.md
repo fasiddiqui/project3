@@ -22,13 +22,16 @@
 * I add a static Page Table to keep track of thread_IDs
 * I index the pages based on their thread_IDs
 * ^ requires me to make by Table Large enough to avoid collisions
-* struct page {
+
+* Basic Page Struct V
+** struct page {
 *   //member variables
 *    pthread_t id;
 *    int valid;
 *    void *address; //address maps to anonymous memory pointer
 *
 * }; //alias -> PAGE
+
 **Key information**
 * Semaphores implementation seemed simple but currently hangs
 
