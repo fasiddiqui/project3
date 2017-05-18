@@ -77,6 +77,11 @@ int sem_down(sem_t sem)
 
 int sem_up(sem_t sem)
 {
+	//Error_Checking(UnAllocated Object)
+	if (sem == NULL){
+    	return(-1);
+	}
+
 	enter_critical_section();
 	if (queue_length(sem->List)){   
     	thread_unblock(sem->tid);//wakeup this thread			
