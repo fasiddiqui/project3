@@ -6,17 +6,14 @@
 #include "thread.h"
 #include "sem.h"
 
-
 struct semaphore 
 {
   int value;
+  pthread_t tid;
   queue_t List; // list of thread IDs
 };
 
-
 // GLOBAL VARIABLES //
-
-pthread_t tid;
 
 sem_t sem_create(size_t count)
 {
