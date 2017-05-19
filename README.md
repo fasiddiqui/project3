@@ -16,6 +16,10 @@
 * TPS I implemented a static Page Table of size 1024
 * Page object contains adress of memory, valid bit, other variables not yet implemented.
 * I decided to include several helper functions some of which do similar operations
+* Resize could be implemented with capacity variable
+* When capacity exceeds thershold open up more array indiced and update Page_SIZE(dynamic)
+* Amortized Big-O(n) should also beat queue's iterate
+* Free's indecied (random) actually performs well
 
 **Implementation:**
 * Since the client app dosen't have access to pointer objects I mangage it myself
