@@ -1,18 +1,6 @@
 #ifndef _TPS_H
 #define _TPS_H
 
-#include <assert.h>
-#include <pthread.h>
-#include <signal.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/mman.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <stdint.h>
-
 /*
  * Size of a TPS area in bytes
  */
