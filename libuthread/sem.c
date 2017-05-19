@@ -55,7 +55,7 @@ int sem_down(sem_t sem)
 
     //Error_Checking(UnAllocated Object)  
     if (sem == NULL){
-	
+	exit_critical_section();
     	return(-1);
     }
     if (sem->value > 0){
@@ -80,6 +80,7 @@ int sem_up(sem_t sem)
 	enter_critical_section();
 	//Error_Checking(UnAllocated Object)
 	if (sem == NULL){
+	exit_critical_section();
     	return(-1);
 	}
 	if (queue_length(sem->List)){   
