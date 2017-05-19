@@ -11,7 +11,6 @@
 * REPORT.md
 
 **Design choices:**
-* I decided to use the queue implementation from phase 2 
 * Queue was modified to run get_length in O(1) time via a size variable
 * TPS I implemented a static Page Table of size 1024
 * Page object contains adress of memory, valid bit, other variables not yet implemented.
