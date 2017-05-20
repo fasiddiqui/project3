@@ -1,5 +1,7 @@
-# General Information ## Class: ECS150  ## Instructor: Joel Porquet ## Project
-name: libuthread.a
+# General Information 
+## Class: ECS150  
+## Instructor: Joel Porquet 
+## Project Name: libuthread.a
 
 ## Introduction: The goal of this project is to extend our understanding of
 threads, by implementing two independent parts:
@@ -39,8 +41,8 @@ semaphore, we initialize it, and return a pointer to the allocated semaphore. In
 *sem_destroy()*, we check if threads are bieng blocked and if not, then we
 dostroy and free sem. As for *sem_down()*, we first enter the critical section,
 we check weather sem was properly allocated, we enqueue the current thread and
-call * thread_block() *, then we exit the critical section. Lastly in * sem_up()
-*, we first enter the critical section then we check for the proper allocation
+call *thread_block()*, then we exit the critical section. Lastly in *sem_up()*, 
+we first enter the critical section then we check for the proper allocation
 of sem. Now, we unblock the blocked thread, we dequeue the thread ID, increment
 the thread count, and we exit the critical section.
 
