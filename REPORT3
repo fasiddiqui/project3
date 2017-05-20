@@ -1,13 +1,13 @@
-# General Information
-## Class: ECS150 
-## Instructor: Joel Porquet
-## Project name: libuthread.a
+#General Information
+##Class: ECS150 
+##Instructor: Joel Porquet
+##Project name: libuthread.a
 
-## Introduction:
+##Introduction:
 The goal of this project is to extend our understanding of threads, by implementing two independent parts:
 
 1.Semaphores, for efficient thread synchronization by using waiting queues.
-2.Per-thread protected memory regions. Threads will be able to create their own private storage (a.k.a. TPS or Thread Private Storage), transparently accessible by an API and protected from other threads.
+2.Per-thread protected memory regions. Threads will be able to create their own private storage.
 
 	
 Our project contains the following files:
